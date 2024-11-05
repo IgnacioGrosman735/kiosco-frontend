@@ -1,0 +1,20 @@
+<dx-toolbar>
+    <!-- Título del Kiosco en el centro -->
+    <dxi-item location="center" text="Super Kiosco"></dxi-item>
+
+    <!-- Menú horizontal con las opciones de navegación -->
+    <dxi-item location="before">
+        <dx-menu 
+            [dataSource]="menuItems" displayExpr="text" orientation="horizontal"
+            (onItemClick)="handleMenuItemClick($event)">
+        </dx-menu>
+    </dxi-item>
+
+    <!-- Botones de Login y Register a la derecha -->
+    <dxi-item location="after" class="auth-buttons">
+        <dx-button text="Login" stylingMode="text" (onClick)="navigateTo('login')">
+        </dx-button>
+        <dx-button text="Register" stylingMode="text" (onClick)="navigateTo('register')">
+        </dx-button>
+    </dxi-item>
+</dx-toolbar>

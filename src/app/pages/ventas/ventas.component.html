@@ -1,0 +1,122 @@
+<div class="venta-container">
+  <!-- Botón para mostrar el formulario de venta -->
+  <div class="dx-field">
+    <dx-button text="Agregar venta" icon="plus" (onClick)="mostrarFormulario = !mostrarFormulario">
+    </dx-button>
+  </div>
+
+  <!-- El formulario de compra solo se muestra si mostrarFormulario es true -->
+  <div *ngIf="mostrarFormulario" class="formulario-venta">
+    <dx-toast
+      [(visible)]="toastVisible"
+      [message]="toastMessage"
+      [type]="toastType"
+      [position]="{ my: 'center', at: 'center', of: 'success' }"
+      [displayTime]="2000">
+    </dx-toast>
+
+    <!-- Registrar nueva venta -->
+    <div class="dx-fieldset">
+      
+      <!-- Lista de Productos -->
+      <div class="dx-field">
+        <div class="dx-field-label">Producto</div>
+        <dx-select-box 
+          [dataSource]="productos" 
+          displayExpr="nombre" 
+          valueExpr="id" 
+          [(value)]="ventaTemporal.producto_id"
+          (onValueChanged)="actualizarPrecio(ventaTemporal.producto_id)">
+          placeholder="Seleccione un producto">
+        </dx-select-box>
+
+        <div class="tercera-linea">
+          <div class="cantidad">
+            <div class="dx-field-label">Cantidad</div>
+            <dx-number-box [(value)]="ventaTemporal.cantidad" [min]="1">
+            </dx-number-box>
+          </div>
+          <div class="precio">
+            <div class="dx-field-label">Precio</div>
+            <dx-text-box [(value)]="ventaTemporal.precio_venta" [readOnly]="true">
+            </dx-text-box>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listado de productos agregados en un DataGrid -->
+      <div *ngIf="venta.productos.length > 0">
+        <dx-data-grid
+          [dataSource]="ventaDataGrid.productos"
+          [columns]="[
+            { dataField: 'nombre', caption: 'Producto' },
+            { dataField: 'cantidad', caption: 'Cantidad' },
+            { dataField: 'precio_venta', caption: 'Precio' },
+            { dataField: 'total', caption: 'Total' }
+          ]"
+          [showBorders]="true">
+        </dx-data-grid>
+      </div>
+        
+      <div class="botones">
+        <!-- Botón para agregar otro producto -->
+        <div class="dx-field">
+          <dx-button text="Agregar Producto" icon="plus" (onClick)="agregarProducto()">
+          </dx-button>
+        </div>
+
+        <!-- Botón para registrar la compra -->
+        <div class="dx-field">
+          <dx-button text="Registrar Venta" icon="check" (onClick)="registrarVenta()">
+          </dx-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Ventas realizadas</h2>
+
+    <dx-data-grid class="data-grid"
+      [dataSource]="ventas" 
+      [showBorders]="true" 
+      [columnAutoWidth]="true" 
+      [paging]="{ pageSize: 10 }"
+      [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }"
+      (onRowClick)="onRowClick($event)">
+
+      <!-- Columna ID -->
+      <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
+
+      <!-- Columna Cliente -->
+      <dxi-column dataField="cliente_id" caption="Cliente">
+      </dxi-column>
+
+      <!-- Columna Fecha -->
+      <dxi-column dataField="fecha" caption="Fecha" dataType="date"
+        [format]="{ type: 'shortDate', formatter: customDateFormatter }"></dxi-column>
+
+      <!-- Columna Total -->
+      <dxi-column dataField="venta_total" caption="Total"
+        [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+
+    </dx-data-grid>
+
+    <div *ngIf="selectedVenta">
+      <h3>Detalles de la Venta ID: {{ selectedVenta.id }}</h3>
+      <dx-data-grid [dataSource]="detalles" [showBorders]="true" [columnAutoWidth]="true" [paging]="{ pageSize: 5 }"
+        [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10], showInfo: true }">
+
+        <dxi-column dataField="producto_id" caption="Producto" [lookup]="{
+          dataSource: productos,
+          valueExpr: 'id',
+          displayExpr: 'nombre'
+        }">
+        </dxi-column>
+        <dxi-column dataField="cantidad" caption="Cantidad"></dxi-column>
+        <dxi-column dataField="precio_unitario" caption="Precio"
+          [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+        <dxi-column dataField="venta_total" caption="Total"
+          [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+      </dx-data-grid>
+    </div>
+</div>

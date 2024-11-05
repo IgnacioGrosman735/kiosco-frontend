@@ -1,0 +1,134 @@
+<div class="compra-container">
+  <h2>Historial de Compras</h2>
+
+  <dx-data-grid class="data-grid"
+  [dataSource]="compras" [showBorders]="true" [columnAutoWidth]="true" [paging]="{ pageSize: 10 }"
+    [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }"
+    (onRowClick)="onRowClick($event)">
+
+    <!-- Columna ID -->
+    <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
+
+    <!-- Columna Proveedor -->
+    <dxi-column dataField="proveedor_id" caption="Proveedor" [lookup]="{
+        dataSource: proveedores,
+        valueExpr: 'id',
+        displayExpr: 'razon_social'
+      }">
+    </dxi-column>
+
+    <!-- Columna Fecha -->
+    <dxi-column dataField="fecha" caption="Fecha" dataType="date"
+      [format]="{ type: 'shortDate', formatter: customDateFormatter }"></dxi-column>
+
+    <!-- Columna Total -->
+    <dxi-column dataField="costo_total" caption="Total"
+      [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+
+  </dx-data-grid>
+
+  <div *ngIf="selectedCompra">
+    <h3>Detalles de la Compra ID: {{ selectedCompra.id }}</h3>
+    <dx-data-grid [dataSource]="detalles" [showBorders]="true" [columnAutoWidth]="true" [paging]="{ pageSize: 5 }"
+      [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10], showInfo: true }">
+
+      <dxi-column dataField="producto_id" caption="Producto" [lookup]="{
+        dataSource: productos,
+        valueExpr: 'id',
+        displayExpr: 'nombre'
+      }">
+      </dxi-column>
+      <dxi-column dataField="cantidad" caption="Cantidad"></dxi-column>
+      <dxi-column dataField="costo_unitario" caption="Costo Unitario"
+        [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+      <dxi-column dataField="costo_total" caption="Costo Total"
+        [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+    </dx-data-grid>
+  </div>
+
+<!-- Botón para mostrar el formulario de compra -->
+<div class="dx-field">
+  <dx-button text="Agregar compra" icon="plus" (onClick)="mostrarFormulario = !mostrarFormulario">
+  </dx-button>
+</div>
+
+<!-- El formulario de compra solo se muestra si mostrarFormulario es true -->
+<div *ngIf="mostrarFormulario" class="formulario-compra">
+  <dx-toast
+    [(visible)]="toastVisible"
+    [message]="toastMessage"
+    [type]="toastType"
+    [position]="{ my: 'center', at: 'center', of: 'success' }"
+    [displayTime]="2000">
+  </dx-toast>
+
+  <!-- Registrar nueva compra -->
+  <div class="dx-fieldset">
+    <!-- Selección del Proveedor -->
+    <div class="dx-field">
+      <div class="dx-field-label">Proveedor</div>
+      <dx-select-box 
+        [dataSource]="proveedores" 
+        displayExpr="razon_social" 
+        valueExpr="id" 
+        [(value)]="compra.proveedor_id"
+        (onValueChanged)="onProveedorChange($event.value)"
+        placeholder="Seleccione un proveedor">
+      </dx-select-box>
+    </div>  
+
+    <!-- Lista de Productos -->
+    <div class="dx-field">
+      <div class="dx-field-label">Producto</div>
+      <dx-select-box 
+        [dataSource]="productosFiltrados" 
+        displayExpr="nombre" 
+        valueExpr="id" 
+        [(value)]="productoTemporal.producto_id"
+        (onValueChanged)="onProductoChange(productoTemporal.producto_id)" 
+        placeholder="Seleccione un producto">
+      </dx-select-box>
+
+      <div class="tercera-linea">
+        <div class="cantidad">
+          <div class="dx-field-label">Cantidad</div>
+          <dx-number-box [(value)]="productoTemporal.cantidad" [min]="1">
+          </dx-number-box>
+        </div>
+        <div class="precio">
+          <div class="dx-field-label">Precio</div>
+          <dx-text-box [(value)]="productoTemporal.precio">
+          </dx-text-box>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listado de productos agregados en un DataGrid -->
+    <div *ngIf="compra.productos.length > 0">
+      <dx-data-grid
+        [dataSource]="compraDataGrid.productos"
+        [columns]="[
+          { dataField: 'nombre', caption: 'Producto' },
+          { dataField: 'cantidad', caption: 'Cantidad' },
+          { dataField: 'precio', caption: 'Precio' },
+          { dataField: 'total', caption: 'Total' }
+        ]"
+        [showBorders]="true">
+      </dx-data-grid>
+    </div>
+      
+    <div class="botones">
+      <!-- Botón para agregar otro producto -->
+      <div class="dx-field">
+        <dx-button text="Agregar Producto" icon="plus" (onClick)="agregarProducto()">
+        </dx-button>
+      </div>
+
+      <!-- Botón para registrar la compra -->
+      <div class="dx-field">
+        <dx-button text="Registrar Compra" icon="check" (onClick)="registrarCompra()">
+        </dx-button>
+      </div>
+    </div>
+  </div>
+</div>

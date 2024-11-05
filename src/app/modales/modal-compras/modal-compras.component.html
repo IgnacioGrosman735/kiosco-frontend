@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="modal" *ngIf="isOpen">
+        <div class="modal-header">
+            <button (click)="minimizeModal()">Minimizar</button>
+            <button *ngIf="isMinimized" (click)="restoreModal()">Restaurar</button>
+            <button (click)="closeModal()">Cerrar</button>
+        </div>
+
+        <!-- Solo mostramos el contenido si no está minimizado -->
+        <div class="modal-content" *ngIf="!isMinimized">
+            <app-compras></app-compras>
+        </div>
+    </div>
+</div>

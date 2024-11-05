@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Proveedores</h1>
+    <dx-data-grid 
+        [dataSource]="proveedores" 
+        keyExpr="id" 
+        [showBorders]="true" 
+        (onRowClick)="onRowClick($event)"
+        (onRowUpdated)="onRowUpdated($event)"
+        (onRowRemoved)="onRowRemoved($event)"
+        (onRowInserted)="onRowInserted($event)">
+        <dxo-editing 
+            [allowUpdating]="true" 
+            [allowAdding]="true" 
+            [allowDeleting]="true" 
+            mode="popup">
+            <dxo-form labelLocation="top"></dxo-form>
+            <dxo-popup [showTitle]="true" title="Row in the editing state"></dxo-popup>
+        </dxo-editing>
+        <dxi-column dataField="id" caption="ID" [width]="50" [allowEditing]="false"></dxi-column>
+        <dxi-column dataField="cuit" caption="CUIT"></dxi-column>
+        <dxi-column dataField="razon_social" caption="Razón Social"></dxi-column>
+        <dxi-column dataField="condicion_fiscal" caption="Condición Fiscal"></dxi-column>
+        <dxi-column dataField="direccion" caption="Dirección"></dxi-column>
+        <dxi-column dataField="telefono" caption="Teléfono"></dxi-column>
+        <dxi-column dataField="email" caption="Email"></dxi-column>
+    </dx-data-grid>
+
+    <!-- <div *ngIf="isEditing || selectedProveedor">
+        <h2>{{ isEditing ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h2>
+        <dx-form [formData]="selectedProveedor" [readOnly]="false" [colCount]="2">
+            <dxi-item dataField="cuit" [isRequired]="true" caption="CUIT"></dxi-item>
+            <dxi-item dataField="razon_social" [isRequired]="true" caption="Razón Social"></dxi-item>
+            <dxi-item dataField="condicion_fiscal" caption="Condición Fiscal"></dxi-item>
+            <dxi-item dataField="direccion" caption="Dirección"></dxi-item>
+            <dxi-item dataField="telefono" caption="Teléfono"></dxi-item>
+            <dxi-item dataField="email" [editorType]="'dxTextBox'" [editorOptions]="{ mode: 'email' }"
+                caption="Email"></dxi-item>
+        </dx-form>
+    </div> -->
+</div>

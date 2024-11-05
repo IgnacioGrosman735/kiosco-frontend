@@ -1,0 +1,38 @@
+<div class="container">
+    <dx-data-grid 
+    [dataSource]="productos" 
+    [showBorders]="true" 
+    [columnAutoWidth]="true" 
+    [paging]="{ pageSize: 5 }" 
+    [pager]="{ 
+        showPageSizeSelector: true, 
+        allowedPageSizes: [5, 10, 20], 
+        showInfo: true 
+    }"
+    [filterRow]="{ visible: true }"
+    [searchPanel]="{ visible: true, highlightCaseSensitive: true }"
+    [headerFilter]="{ visible: true }">
+
+    <!-- Columna ID del Stock -->
+    <dxi-column dataField="id" caption="ID Stock" width="70"></dxi-column>
+
+    <!-- Columna Nombre del Producto -->
+    <dxi-column dataField="producto_nombre" caption="Producto"></dxi-column>
+
+    <!-- Columna Cantidad en Stock -->
+    <dxi-column dataField="cantidad" caption="Cantidad" dataType="number"></dxi-column>
+
+    </dx-data-grid>
+
+    <dx-chart id="chart" [dataSource]="productos">
+        <dxi-series
+          argumentField="producto_nombre"
+          valueField="cantidad"
+          name="Stock de productos"
+          type="bar"
+          color="#ffaa66"
+        >
+        </dxi-series>
+    </dx-chart>
+</div>
+

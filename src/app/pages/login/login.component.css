@@ -1,0 +1,36 @@
+h2{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    max-width: 30%;
+}
+
+.container{
+    max-width: 30%;
+    display: flex;
+    flex-direction: column; /* Coloca los elementos hijos en una columna */
+    align-items: stretch; /* Asegura que los hijos usen todo el ancho */
+    justify-content: center;
+}
+
+.estilo{
+    background-color: white; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris claro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mayor contraste */
+    margin: 20px auto; /* Espaciado externo */
+}
+
+.form-control {
+    width: 100%; /* Asegura que los inputs usen el 100% del ancho disponible */
+    box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+    padding: 10px; /* Añade padding para mejorar el aspecto */
+    font-size: 1rem; /* Ajusta el tamaño de la fuente */
+}
+
+.mb-3{
+    display: grid;
+}
+
+

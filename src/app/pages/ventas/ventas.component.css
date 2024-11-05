@@ -1,0 +1,62 @@
+.venta-container{
+    margin: 20px;
+}
+
+.formulario-venta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+  }
+  
+.data-grid{
+    padding: auto;
+}
+
+  .dx-field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .dx-button {
+    margin-top: 20px;
+    width: 20em;
+  }
+  
+  .dx-fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tercera-linea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .cantidad{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .precio{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }

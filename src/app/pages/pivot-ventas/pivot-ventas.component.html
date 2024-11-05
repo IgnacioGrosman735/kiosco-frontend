@@ -1,0 +1,59 @@
+<div class="container">
+    <dx-pivot-grid
+        [dataSource]="ventasDataSource"
+        [allowSorting]="true"
+        [allowFiltering]="true"
+        [allowExpandAll]="true"
+        [allowSortingBySummary]="true"
+        [showBorders]="true"
+        [rowHeaderLayout]="'tree'"
+        (onExporting)="exportar()">
+    </dx-pivot-grid>
+
+    <button (click)="exportar()" class="btn btn-primary">
+        Exportar a Excel
+    </button>
+
+    <dx-chart [dataSource]="ventasPorMes" title="Ventas Totales por Categoría y Producto">
+        <!-- Configuración común de las series -->
+        <dxo-common-series-settings 
+            argumentField="fecha" 
+            type="stackedBar">
+        </dxo-common-series-settings>
+    
+        <!-- Series para cada producto -->
+        <dxi-series 
+            *ngFor="let productName of productNames"
+            [valueField]="productName"
+            [name]="productName"
+            [stack]="getCategoryForProduct(productName)">
+        </dxi-series>
+
+        <dxo-legend 
+            [verticalAlignment]="'bottom'"
+            [horizontalAlignment]="'center'">
+        </dxo-legend>
+            
+        <!-- Eje de argumentos (categoría) -->
+        <dxo-argument-axis [label]="{ format: 'string' }">
+        </dxo-argument-axis>
+    
+        <!-- Eje de valores (total de ventas) -->
+        <dxo-value-axis>
+            <dxo-title text="Ventas en Pesos"></dxo-title>
+        </dxo-value-axis>
+
+        
+    
+        <!-- Configuración del tooltip -->
+        <dxo-tooltip 
+            [enabled]="true" 
+            [shared]="true" 
+            [location]="'edge'"  
+            [format]="{ type: 'currency', precision: 2 }">
+        </dxo-tooltip>
+    </dx-chart>
+    
+
+</div>
+  

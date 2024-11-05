@@ -1,0 +1,58 @@
+h2{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    max-width: 40%;
+}
+
+.container{
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.estilo{
+    background-color: white; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris claro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mayor contraste */
+    margin: 20px auto; /* Espaciado externo */
+}
+
+.date{
+    display: flex;
+}
+
+dx-date-box {
+    margin: 10px 0; /* Espacio entre los date boxes */
+    width: 100%; /* Ocupar el ancho completo del contenedor */
+}
+
+dx-date-box,
+dx-button {
+    flex-grow: 1; /* Permitir que todos crezcan igual */
+    margin: 10px 0; /* Espacio entre los elementos */
+    width: 100%; /* Ocupar el ancho completo del contenedor */
+}
+
+dx-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 10px; /* Espaciado interno */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}   
+
+dx-button:active {
+    background-color: red; /* Cambia el color al presionar */
+}
+
+/* Efecto hover */
+dx-button:hover {
+    background-color: #0056b3; /* Cambiar color al pasar el mouse */
+}

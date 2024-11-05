@@ -1,0 +1,33 @@
+<div class="container">  
+  <h1>Productos</h1>
+  <dx-data-grid 
+    [dataSource]="productos" 
+    [showBorders]="true" 
+    keyExpr="id"
+    (onRowInserted)="onRowInserted($event)"
+    (onRowUpdated)="onRowUpdated($event)"
+    (onRowRemoved)="onRowRemoved($event)"
+    (onEditorPreparing)="onEditorPreparing($event)"
+    (onEditingStart)="onRowEditingStarted($event)">
+    <dxo-editing
+      [allowUpdating]="true" 
+      [allowAdding]="true" 
+      [allowDeleting]="true" 
+      mode="popup">
+    </dxo-editing>
+    <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+    <dxi-column dataField="nombre" caption="Nombre del Producto"></dxi-column>
+    <dxi-column dataField="categoria" caption="Categoría"></dxi-column>
+    <dxi-column dataField="descripcion" caption="Descripción"></dxi-column>
+    <dxi-column dataField="precio_venta" caption="Precio de Venta"></dxi-column>
+    <dxi-column dataField="proveedor_id" caption="Proveedor" 
+      [lookup]="{
+        dataSource: proveedores,
+        valueExpr: 'id',
+        displayExpr: 'razon_social'
+      }">
+    </dxi-column>
+  </dx-data-grid> 
+</div>

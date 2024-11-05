@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="date">
+    <dx-date-box
+      [(value)]="fechaInicio"
+      [displayFormat]="'dd/MM/yyyy'"
+      [placeholder]="'Fecha Inicio'">
+    </dx-date-box>
+
+    <dx-date-box
+      [(value)]="fechaFin"
+      [displayFormat]="'dd/MM/yyyy'"
+      [placeholder]="'Fecha Fin'">
+    </dx-date-box>
+
+    <dx-button (onClick)="filtrarPorRango()">Filtrar</dx-button>
+  </div>
+  <dx-data-grid class="data-grid"
+    [dataSource]="registrosCaja"
+    [showBorders]="true"
+    [columnAutoWidth]="true"
+    [paging]="{ pageSize: 5 }"
+    [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }">
+
+    <!-- Columna ID -->
+    <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
+
+    <!-- Columna Tipo de Movimiento -->
+    <dxi-column dataField="tipo_movimiento" caption="Tipo de Movimiento"></dxi-column>
+
+    <!-- Columna Monto -->
+    <dxi-column dataField="monto" caption="Monto" dataType="number"
+      [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+
+    <!-- Columna Saldo -->
+    <dxi-column dataField="saldo" caption="Saldo" dataType="number"
+      [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+
+    <!-- Columna Fecha -->
+    <dxi-column 
+      dataField="fecha" 
+      caption="Fecha" 
+      dataType="date" 
+      [format]="dateFormatter">
+    </dxi-column>
+
+  </dx-data-grid>
+</div>
+  

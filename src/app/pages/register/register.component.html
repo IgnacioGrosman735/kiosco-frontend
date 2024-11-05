@@ -1,0 +1,18 @@
+<h2 class="estilo">Formulario de Registro</h2>
+<div class="container estilo">
+    <form (ngSubmit)="register()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="user.nombre" name="nombre" required class="form-control" >
+        </div>        
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" [(ngModel)]="user.email" name="email" required class="form-control" >
+        </div>        
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña:</label>
+            <input type="password" id="password" [(ngModel)]="user.password" name="password" required class="form-control" >
+        </div>        
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+</div>

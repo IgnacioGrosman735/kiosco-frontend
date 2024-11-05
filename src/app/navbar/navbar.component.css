@@ -1,0 +1,65 @@
+dx-toolbar {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    align-items: center;
+    background-color: #333; /* Fondo oscuro */
+    padding: 10px 20px;
+    color: #fff;
+}
+
+/* Estilo para el menú */
+dx-menu {
+    flex: 1; /* Permite que ocupe el espacio restante */
+}
+
+/* Estilos para los items del menú */
+::ng-deep .dx-menu-horizontal .dx-menu-item {
+    color: #fff !important; /* Color de texto blanco */
+    padding: 10px 15px; /* Espaciado interno en los elementos del menú */
+    background-color: transparent; /* Color de fondo normal */
+    transition: background-color 0.3s; /* Transición suave al cambiar de color */
+}
+
+/* Estilo para el item del menú cuando está en hover */
+::ng-deep .dx-menu-horizontal .dx-menu-item:hover {
+    background-color: #444; /* Color de fondo en hover */
+}
+
+/* Estilo para el item del menú en estado activo */
+::ng-deep .dx-menu-horizontal .dx-menu-item.dx-state-active {
+    background-color: #333; /* Color de fondo para el item activo */
+}
+
+/* Estilo para el submenú */
+::ng-deep .dx-menu-horizontal .dx-submenu .dx-menu-item {
+    background-color: transparent; /* Color de fondo normal del submenú */
+}
+
+/* Estilo para el submenú cuando está en hover */
+::ng-deep .dx-menu-horizontal .dx-submenu .dx-menu-item:hover {
+    background-color: #444; /* Color de fondo en hover para el submenú */
+}
+
+/* Estilo para el título */
+dxi-item[location="center"] {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Alinear los botones de Login y Register a la derecha */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons dx-button {
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons dx-button:hover {
+    background-color: #555;
+}

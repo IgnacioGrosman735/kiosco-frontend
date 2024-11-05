@@ -1,0 +1,22 @@
+h2{
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    max-width: 40%;
+}
+
+.container{
+    max-width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.estilo{
+    background-color: white; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris claro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mayor contraste */
+    margin: 20px auto; /* Espaciado externo */
+}
