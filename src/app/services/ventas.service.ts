@@ -29,7 +29,7 @@ export interface VentaDataGrafico {
 })
 export class VentasService {
 
-  private apiUrl = 'http://localhost:5000';  // URL del backend
+  private apiUrl = process?.env?.['API_URL'] || 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 

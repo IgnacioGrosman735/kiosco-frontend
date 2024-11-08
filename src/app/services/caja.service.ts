@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CajaService {
 
-  private apiUrl = 'http://localhost:5000'; // Asegúrate de que la URL coincida con tu configuración backend
+  private apiUrl = process?.env?.['API_URL'] || 'http://localhost:5000';
 
   constructor(private http: HttpClient) { }
 
