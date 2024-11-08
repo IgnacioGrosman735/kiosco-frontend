@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/kiosco-frontend",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -40,6 +40,30 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputPath": "dist/kiosco-frontend",
+              "index": "src/index.html",
+              "main": "src/main.ts",
+              "tsConfig": "tsconfig.app.json",
+              "aot": true,
+              "assets": [
+                "src/favicon.ico",
+                "src/assets"
+              ],
+              "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/devextreme/dist/css/dx.material.blue.light.css",
+              "src/styles.css"
+              ],
+              "scripts": [
+                "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -92,9 +116,13 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/devextreme/dist/css/dx.material.blue.light.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           }
         }
       }
