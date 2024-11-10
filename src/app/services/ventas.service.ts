@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
+import { environment } from '../../environments/environment';  // Importa environment
 
 export interface DetalleVenta {
   cantidad: number;
@@ -29,7 +30,7 @@ export interface VentaDataGrafico {
 })
 export class VentasService {
 
-  private apiUrl = process?.env?.['API_URL'] || 'http://localhost:5000';
+  private apiUrl = environment.API_URL;  // Usa environment.apiUrl
 
   constructor(private http: HttpClient) { }
 

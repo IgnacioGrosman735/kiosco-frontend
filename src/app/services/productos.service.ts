@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';  // Importa environment
 
 export interface Producto {
   precio: any;
@@ -15,7 +16,8 @@ export interface Producto {
   providedIn: 'root'
 })
 export class ProductosService {
-  private apiUrl = process?.env?.['API_URL'] || 'http://localhost:5000';
+
+  private apiUrl = environment.API_URL;  // Usa environment.apiUrl
 
   constructor(private http: HttpClient) {}
 
