@@ -8,21 +8,22 @@ import {
   DxToastModule
 } from 'devextreme-angular';
 
-import { Component, inject, OnInit } from '@angular/core';
-import { Compras, ComprasService } from '../../services/compras.service';
+import { Component, OnInit } from '@angular/core';
+import { ComprasService } from '../../services/compras.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { ProveedorService } from '../../services/proveedor.service';
 import { Proveedor } from '../../services/proveedor.service';
 import { ProductosService } from '../../services/productos.service';
 import { Producto } from '../../services/productos.service';
+import { RowClickEvent } from "devextreme/ui/data_grid";
+import { Compras, Compra, ProductoTemporal } from '../../models/compras.model';
 
 @Component({
   selector: 'app-compras',
   standalone: true,
   imports: [
-    FormsModule, 
-    NgFor, 
+    FormsModule,
     NgIf, 
     CommonModule,
     DxDataGridModule,
@@ -40,7 +41,7 @@ export class ComprasComponent implements OnInit {
 
   mostrarFormulario = false;
   // Estructura de la compra
-  compra: any = {
+  compra: Compra = {
     proveedor_id: null,
     productos: [
       {
@@ -50,7 +51,7 @@ export class ComprasComponent implements OnInit {
     ]
   };
 
-  productoTemporal: any = {
+  productoTemporal: ProductoTemporal = {
     proveedor_id: null,
     producto_id: null,
     nombre: "",
@@ -112,7 +113,7 @@ export class ComprasComponent implements OnInit {
 
 
   // Método para manejar el clic en una fila
-  onRowClick(event: any) {
+  onRowClick(event: RowClickEvent) {
     const compraId = event.data.id; // Obtener el id de la compra seleccionada
     this.mostrarDetalles(compraId); // Llamar a la función para mostrar detalles
   }
@@ -183,9 +184,12 @@ export class ComprasComponent implements OnInit {
   limpiarFormulario() {
     // Reiniciar los valores del producto temporal
     this.productoTemporal = {
+      proveedor_id: null,
       producto_id: null,
-      cantidad: 1
-    };
+      nombre: "",
+      cantidad: 1,
+      precio: 0
+      };
   }
 
   // Eliminar un producto de la compra
@@ -216,7 +220,9 @@ export class ComprasComponent implements OnInit {
     }
 
     // Limpiamos los productos seleccionados en la compra
-    this.compra.productos.forEach((prod: { producto_id: null; }) => prod.producto_id = null);
+    this.compra.productos.forEach((prod) => {
+      prod.producto_id = null; // Solo modificamos producto_id, dejando las demás propiedades intactas
+    });
   }
 
   // Evento que ocurre cuando el valor del producto cambia
@@ -242,6 +248,14 @@ export class ComprasComponent implements OnInit {
     }
   }
 
+  get precioTemporal(): string {
+    return this.productoTemporal.precio.toString();
+  }
+  
+  set precioTemporal(value: string) {
+    this.productoTemporal.precio = parseFloat(value) || 0;
+  }
+
   limpiarFormularioCompleto() {
     // Reinicia la información de la compra
     this.compra = {
@@ -256,10 +270,12 @@ export class ComprasComponent implements OnInit {
   
     // Reinicia el producto temporal
     this.productoTemporal = {
+      proveedor_id: null,
       producto_id: null,
+      nombre: "",
       cantidad: 1,
-      precio: null
-    };
+      precio: 0
+      };
   
     // Vaciar el grid de productos
     this.compraDataGrid.productos = [];

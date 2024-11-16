@@ -3,21 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from './productos.service';
 import { environment } from '../../environments/environment';  // Importa environment
+import { Compras } from '../models/compras.model';
 
-export interface DetalleCompra {
-  cantidad: number;
-  costo_total: string; // O number, dependiendo de cómo lo manejes
-  costo_unitario: string; // O number
-  producto_id: number;
-}
-
-export interface Compras {
-  id: number;             // Identificador único del proveedor (primary key)
-  proveedor_id: number;
-  costo_total: number;
-  fecha: string;
-  detalles: DetalleCompra[];
-}
 
 @Injectable({
   providedIn: 'root'

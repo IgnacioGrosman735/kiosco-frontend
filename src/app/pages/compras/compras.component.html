@@ -2,34 +2,42 @@
   <h2>Historial de Compras</h2>
 
   <dx-data-grid class="data-grid"
-  [dataSource]="compras" [showBorders]="true" [columnAutoWidth]="true" [paging]="{ pageSize: 10 }"
+
+    [dataSource]="compras" 
+    [showBorders]="true" 
+    [columnAutoWidth]="true" 
+    [paging]="{ pageSize: 5 }"
     [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }"
     (onRowClick)="onRowClick($event)">
 
-    <!-- Columna ID -->
-    <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
+      <!-- Columna ID -->
+      <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
 
-    <!-- Columna Proveedor -->
-    <dxi-column dataField="proveedor_id" caption="Proveedor" [lookup]="{
-        dataSource: proveedores,
-        valueExpr: 'id',
-        displayExpr: 'razon_social'
-      }">
-    </dxi-column>
+      <!-- Columna Proveedor -->
+      <dxi-column dataField="proveedor_id" caption="Proveedor" [lookup]="{
+          dataSource: proveedores,
+          valueExpr: 'id',
+          displayExpr: 'razon_social'
+        }">
+      </dxi-column>
 
-    <!-- Columna Fecha -->
-    <dxi-column dataField="fecha" caption="Fecha" dataType="date"
-      [format]="{ type: 'shortDate', formatter: customDateFormatter }"></dxi-column>
+      <!-- Columna Fecha -->
+      <dxi-column dataField="fecha" caption="Fecha" dataType="date"
+        [format]="{ type: 'shortDate', formatter: customDateFormatter }"></dxi-column>
 
-    <!-- Columna Total -->
-    <dxi-column dataField="costo_total" caption="Total"
-      [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
+      <!-- Columna Total -->
+      <dxi-column dataField="costo_total" caption="Total"
+        [format]="{ type: 'currency', currency: 'USD', precision: 2 }"></dxi-column>
 
   </dx-data-grid>
 
   <div *ngIf="selectedCompra">
     <h3>Detalles de la Compra ID: {{ selectedCompra.id }}</h3>
-    <dx-data-grid [dataSource]="detalles" [showBorders]="true" [columnAutoWidth]="true" [paging]="{ pageSize: 5 }"
+    <dx-data-grid 
+      [dataSource]="detalles" 
+      [showBorders]="true" 
+      [columnAutoWidth]="true" 
+      [paging]="{ pageSize: 5 }"
       [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10], showInfo: true }">
 
       <dxi-column dataField="producto_id" caption="Producto" [lookup]="{
@@ -97,7 +105,7 @@
         </div>
         <div class="precio">
           <div class="dx-field-label">Precio</div>
-          <dx-text-box [(value)]="productoTemporal.precio">
+          <dx-text-box [(value)]="precioTemporal">
           </dx-text-box>
         </div>
       </div>

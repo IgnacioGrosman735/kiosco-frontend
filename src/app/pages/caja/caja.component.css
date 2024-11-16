@@ -46,10 +46,15 @@ dx-button {
     padding: 10px; /* Espaciado interno */
     font-weight: bold; /* Texto en negrita */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición para suavizar el cambio de color */
 }   
 
 dx-button:active {
-    background-color: red; /* Cambia el color al presionar */
+    background-color: #6c757d; /* Cambia a gris momentáneamente */
+}
+
+dx-button:focus {
+    background-color: #007bff; /* Volver a azul al perder el foco */
 }
 
 /* Efecto hover */

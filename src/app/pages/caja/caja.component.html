@@ -3,13 +3,17 @@
     <dx-date-box
       [(value)]="fechaInicio"
       [displayFormat]="'dd/MM/yyyy'"
-      [placeholder]="'Fecha Inicio'">
+      [placeholder]="'Fecha Inicio'"
+      [useMaskBehavior]="true"
+      [showClearButton]="true">
     </dx-date-box>
 
     <dx-date-box
       [(value)]="fechaFin"
       [displayFormat]="'dd/MM/yyyy'"
-      [placeholder]="'Fecha Fin'">
+      [placeholder]="'Fecha Fin'"
+      [useMaskBehavior]="true"
+      [showClearButton]="true">
     </dx-date-box>
 
     <dx-button (onClick)="filtrarPorRango()">Filtrar</dx-button>
@@ -22,10 +26,10 @@
     [pager]="{ showPageSizeSelector: true, allowedPageSizes: [5, 10, 20], showInfo: true }">
 
     <!-- Columna ID -->
-    <dxi-column dataField="id" caption="ID" width="70"></dxi-column>
+    <dxi-column dataField="id" caption="ID" dataType="number" width="70"></dxi-column>
 
     <!-- Columna Tipo de Movimiento -->
-    <dxi-column dataField="tipo_movimiento" caption="Tipo de Movimiento"></dxi-column>
+    <dxi-column dataField="tipo_movimiento" caption="Tipo de Movimiento" dataType="string"></dxi-column>
 
     <!-- Columna Monto -->
     <dxi-column dataField="monto" caption="Monto" dataType="number"

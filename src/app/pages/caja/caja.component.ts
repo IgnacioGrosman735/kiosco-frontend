@@ -1,18 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CajaService } from '../../services/caja.service';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { DxDataGridModule, DxDateBoxModule, DxButtonModule } from 'devextreme-angular';
+import { RegistroCaja } from '../../models/registro-caja.model';
 
 @Component({
   selector: 'app-caja',
   standalone: true,
-  imports: [CommonModule, NgFor, DxDataGridModule, DxDateBoxModule, DxButtonModule],
+  imports: [CommonModule, DxDataGridModule, DxDateBoxModule, DxButtonModule],
   templateUrl: './caja.component.html',
   styleUrl: './caja.component.css',
   providers: [CajaService]
 })
 export class CajaComponent implements OnInit {
-
 
   // Formateador de fecha
   dateFormatter = {
@@ -28,7 +28,7 @@ export class CajaComponent implements OnInit {
     return `${day}/${month}/${year}`;
   }
 
-  registrosCaja: any[] = [];
+  registrosCaja: RegistroCaja[] = [];
   fechaInicio: Date = new Date(); // Inicializa como fecha actual
   fechaFin: Date = new Date(); // Inicializa como fecha actual
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DxToolbarModule, DxMenuModule, DxButtonModule } from 'devextreme-angular';
+import { ItemClickEvent } from 'devextreme/ui/menu';
 
 // Definimos nuestro tipo personalizado con la propiedad `path`
 interface CustomMenuItem {
@@ -71,13 +72,18 @@ export class NavbarComponent {
   }
 
   // Método para manejar el clic en el elemento del menú
-  handleMenuItemClick(event: any): void {
-    const selectedItem = this.findMenuItemByText(this.menuItems, event.itemData.text);
+  handleMenuItemClick(event: ItemClickEvent): void {
+    // Verifica que itemData y text están definidos antes de usarlos
+    if (event.itemData && event.itemData.text) {
+      const selectedItem = this.findMenuItemByText(this.menuItems, event.itemData.text);
 
-    if (selectedItem?.path !== undefined) {
-      this.navigateTo(selectedItem.path);
+      if (selectedItem?.path !== undefined) {
+        this.navigateTo(selectedItem.path);
+      } else {
+        console.warn('Ruta no encontrada para el elemento del menú:', event.itemData.text);
+      }
     } else {
-      console.warn('Ruta no encontrada para el elemento del menú:', event.itemData.text);
+      console.warn('Elemento de menú sin texto encontrado en el evento.');
     }
   }
 }
